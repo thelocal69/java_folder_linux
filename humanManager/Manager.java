@@ -1,20 +1,14 @@
 package humanManager;
 
-public class Manager extends Company {
-	private int numberOfEmployer;
-	
-	public Manager() {}
-
-	public Manager(int id, String name, String mobile, int numberOfWork, int salaryPerDay) {
-		super(id, name, mobile, numberOfWork, salaryPerDay);
-		this.numberOfEmployer = 0;
-	}
+public class Manager extends HumanResource {
+	private final double SALARY_PER_DAY = 200;
+	private final String POSITION = "manager";
+	private int m_nNumberOfMember;
 
 	@Override
 	public double formulaSalary() {
-		double salary;
-		salary = this.salaryPerDay * this.numberOfWork + (100000 * this.numberOfEmployer);
-		return salary;
+		m_dSalaryMonth = this.SALARY_PER_DAY * m_nNumberOfWork + (100000 * this.m_nNumberOfMember);
+		return m_dSalaryMonth;
 	}
 
 	@Override
@@ -22,19 +16,24 @@ public class Manager extends Company {
 		super.input();
 	}
 
-	public int getNumberOfEmployer() {
-		return numberOfEmployer;
+	public String getPOSITION() {
+		return POSITION;
 	}
 
-	public void setNumberOfEmployer(int numberOfEmployer) {
-		this.numberOfEmployer = numberOfEmployer;
+	public int getNumberOfMember() {
+		return m_nNumberOfMember;
 	}
-	
+
+	public void setNumberOfMember(int numberOfEmployer) {
+		this.m_nNumberOfMember = numberOfEmployer;
+	}
+
 	@Override
 	public String toString() {
-		return "ID: " + getId() + " Manager Name: " + getName() + " Mobile phone: " + getMobile() + " number of work: "
-				+ getNumberOfWork() + " Salary: " + getDongFormat().format(formulaSalary()) + ""
-				+ getCurrency().getDisplayName() + "number of employer " + getNumberOfEmployer() + "EmP";
+		return "ID: " + getId() + " Position: " + getPOSITION() + " Full name: " + getName() + " Mobile phone: "
+				+ getMobile() + " number of work: " + getNumberOfWork() + " Salary: "
+				+ getDollarFormat().format(formulaSalary()) + " " + getCurrency().getDisplayName()
+				+ " number of employer " + getNumberOfMember() + " member";
 	}
 
 }

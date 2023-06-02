@@ -1,106 +1,53 @@
 package humanManager;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
-public class Human_manager implements Feature_HumanManger {
-	private List<Company> listEmCompanies;
-
-	public Human_manager() {
-		this.listEmCompanies = new ArrayList<>();
-	}
-
-	@Override
-	public void addMember() {
-		System.out.println("Director: ");
-		addDirector();
-		System.out.println("Manager: ");
-		addManger();
-		System.out.println("Employer: ");
-		addEmployer();
+public class Human_manager{
+	private String m_strCompanyName;
+	private int m_nTaxCode;
+	private double m_dRenuaveMonth;
+	
+	public void inputCompany() {
+		System.out.println("\t\t\tHuman Manager");
+		System.out.println("Input company name: ");
+		this.m_strCompanyName = getScanner().nextLine();
+		System.out.println("Input company tax code number: ");
+		this.m_nTaxCode = Integer.parseInt(getScanner().nextLine());
+		System.out.println("Input renuave month of company: ");
+		this.m_dRenuaveMonth = Double.parseDouble(getScanner().nextLine());
 	}
 	
-	public void addDirector() {
-		Company director = new Director();
-		director.input();
-		listEmCompanies.add(director);
-	}
-	
-	public void addManger() {
-		Company manager = new Manager();
-		manager.input();
-		listEmCompanies.add(manager);
-	}
-	
-	public void addEmployer() {
-		Company employer = new Employer();
-		employer.input();
-		listEmCompanies.add(employer);
-	}
-
-	@Override
-	public void deleteMemberById(int id) {
-		for (Company company : listEmCompanies) {
-			if (company.getId() == id)
-				listEmCompanies.remove(company);
-			System.out.println("Delete Succes !");
-			return;
-		}
-		System.out.println("Not found !");
-//		Company company = null;
-//		int size = listEmCompanies.size();
-//		for (int i = 0; i < size; i++) {
-//			if (listEmCompanies.get(i).getId() == id)
-//				company = listEmCompanies.get(i);
-//			break;
-//		}
-//		if(company != null) {
-//			listEmCompanies.remove(company);
-//			System.out.println("Delete is success !");
-//		}else {
-//			System.out.println("Not found !");
-//		}
-	}
-
-	@Override
-	public void showAllMem() {
-		for (Company company : listEmCompanies) {
-			System.out.println(company.toString());
-		}
-	}
 
 	public void menu() {
-		Company company = new Company();
+		Service service = new Service();
 		int choose;
 		int id;
+		inputCompany();
 		while (true) {
 			showMenu();
 			choose = getScanner().nextInt();
 			switch (choose) {
 
 			case 1:
-				company.inpputCompany();
+				service.addMember();
 				break;
 
 			case 2:
-				addMember();
+				System.out.println("Input ID Member: ");
+				id = getScanner().nextInt();
+				service.deleteMemberById(id);
 				break;
 
 			case 3:
-				id = getScanner().nextInt();
-				deleteMemberById(id);
-				break;
-
-			case 4:
-				showAllMem();
+				service.showAllMem();
 				break;
 
 			case 0:
+				System.out.println("\t\t\tProgram is closed !");
 				return;
 
 			default:
-				System.out.println("In");
+				System.out.println("Invalid!");
 				break;
 			}
 		}
@@ -108,12 +55,43 @@ public class Human_manager implements Feature_HumanManger {
 	}
 
 	public void showMenu() {
-		System.out.println("1. Input Information company");
+		System.out.println("\t\t\tWellcome to company "+ this.m_strCompanyName);
 		System.out.println("2. Add member company");
 		System.out.println("3. Delete member in company");
 		System.out.println("4. Show all member");
 		System.out.println("0. exit");
 	}
+	
+	
+	public String getM_strCompanyName() {
+		return m_strCompanyName;
+	}
+
+
+	public void setM_strCompanyName(String m_strCompanyName) {
+		this.m_strCompanyName = m_strCompanyName;
+	}
+
+
+	public int getM_nTaxCode() {
+		return m_nTaxCode;
+	}
+
+
+	public void setM_nTaxCode(int m_nTaxCode) {
+		this.m_nTaxCode = m_nTaxCode;
+	}
+
+
+	public double getM_dRenuaveMonth() {
+		return m_dRenuaveMonth;
+	}
+
+
+	public void setM_dRenuaveMonth(double m_dRenuaveMonth) {
+		this.m_dRenuaveMonth = m_dRenuaveMonth;
+	}
+
 
 	public Scanner getScanner() {
 		Scanner SCANNER = new Scanner(System.in);

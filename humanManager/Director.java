@@ -1,45 +1,41 @@
 package humanManager;
 
-public class Director extends Company {
-	private double share;
-	
-	public Director() {
-		
-	}
-
-	public Director(int id, String name, String mobile, int numberOfWork, int salaryPerDay, double share) {
-		super(id, name, mobile, numberOfWork, salaryPerDay);
-		this.share = share;
-	}
+public class Director extends HumanResource {
+	private final double SALARY_PER_DAY = 300;
+	private final String POSITION = "director";
+	private double m_dShare;
 
 	@Override
 	public double formulaSalary() {
-		double salary;
-		salary = this.numberOfWork * this.salaryPerDay;
-		return salary;
+		m_dSalaryMonth = m_nNumberOfWork * this.SALARY_PER_DAY;
+		return m_dSalaryMonth;
 	}
 
 	@Override
 	public void input() {
 		super.input();
 		System.out.println("Input number of share: ");
-		this.share = Double.parseDouble(getScanner().nextLine());
-		setShare(share);
+		this.m_dShare = Double.parseDouble(getScanner().nextLine());
+	}
+
+	public String getPOSITION() {
+		return POSITION;
 	}
 
 	public double getShare() {
-		return share;
+		return m_dShare;
 	}
 
 	public void setShare(double share) {
-		this.share = share;
+		this.m_dShare = share;
 	}
 
 	@Override
 	public String toString() {
-		return "ID: " + getId() + " Director Name: " + getName() + " Mobile phone: " + getMobile() + " number of work: "
-				+ getNumberOfWork() + " Salary: " + getDongFormat().format(formulaSalary()) + ""
-				+ getCurrency().getDisplayName() + "number of share " + getShare() + "%";
+		return "ID: " + getId() + " Position: " + getPOSITION() + " Full name: " + getName() + " Mobile phone: "
+				+ getMobile() + " number of work: " + getNumberOfWork() + " Salary: "
+				+ getDollarFormat().format(formulaSalary()) + " " + getCurrency().getDisplayName() + " number of share "
+				+ getShare() + "%";
 	}
 
 }

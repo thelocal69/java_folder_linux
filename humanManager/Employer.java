@@ -1,41 +1,52 @@
 package humanManager;
 
-public class Employer extends Company {
+import java.util.Scanner;
 
-	private Manager manager;
-	
-	public Employer() {}
+public class Employer extends HumanResource {
+	private final double SALARY_PER_DAY = 100;
+	private final String POSITION = "member";
+	private String m_strManagerName;
 
-	public Employer(int id, String name, String mobile, int numberOfWork, int salaryPerDay) {
-		super(id, name, mobile, numberOfWork, salaryPerDay);
-		this.manager = null;
+	public String getPOSITION() {
+		return POSITION;
 	}
 
-	public Manager getManager() {
-		return manager;
+	public String getManagerName() {
+		return m_strManagerName;
 	}
 
-	public void setManager(Manager manager) {
-		this.manager = manager;
+	public void setManagerName(String manager) {
+		this.m_strManagerName = manager;
+	}
+
+	public void inputManagerName() {
+		System.out.println("Input Manager Name: ");
+		this.m_strManagerName = getScanner().nextLine();
 	}
 
 	@Override
 	public double formulaSalary() {
-		double salary;
-		salary = this.salaryPerDay * this.numberOfWork;
-		return salary;
+		m_dSalaryMonth = this.SALARY_PER_DAY * m_nNumberOfWork;
+		return m_dSalaryMonth;
 	}
-	
+
 	@Override
 	public void input() {
 		super.input();
+		inputManagerName();
 	}
 
 	@Override
 	public String toString() {
-		return "ID: " + getId() + " Director Name: " + getName() + " Mobile phone: " + getMobile() + " number of work: "
-				+ getNumberOfWork() + " Salary: " + getDongFormat().format(formulaSalary()) + ""
-				+ getCurrency().getDisplayName();
+		return "ID: " + getId() + " Position: " + getPOSITION() + " Full name: " + getName() + " Mobile phone: "
+				+ getMobile() + " number of work: " + getNumberOfWork() + " Salary: "
+				+ getDollarFormat().format(formulaSalary()) + " " + getCurrency().getDisplayName() + " Manager Name: "
+				+ getManagerName();
+	}
+
+	@Override
+	public Scanner getScanner() {
+		return super.getScanner();
 	}
 
 }
