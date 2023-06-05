@@ -1,11 +1,14 @@
 package baitap_ThiDH;
 
 public class Block_B extends Candidate{
-
-	public Block_B(int iD, String fullName, String address, String priority) {
-		super(iD, fullName, address, priority);
-	}
 	
+	
+	
+	@Override
+	public void inputCandidate() {
+		super.inputCandidate();
+	}
+
 	public String getMath() {
 		return "Mathemastic";
 	}

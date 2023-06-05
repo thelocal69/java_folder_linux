@@ -1,18 +1,47 @@
 package baitap_CanBo;
 
-public abstract class Officer {
+import java.util.Scanner;
+
+public class Officer {
 	protected String fullName;
 	protected int age;
 	protected String gender;
 	protected String address;
-	
-	public Officer() {}
-	
-	public Officer(String fullName, int age, String gender, String address) {
-		this.fullName = fullName;
-		this.age = age;
-		this.gender = gender;
-		this.address = address;
+
+	public String inputName() {
+		System.out.println("Input full name: ");
+		return this.fullName = getScanner().nextLine();
+	}
+
+	public int inputAge() {
+		while (true) {
+			try {
+				System.out.println("Input age: ");
+				this.age = Integer.parseInt(getScanner().nextLine());
+				if (age < 18 || age > 71)
+					throw new NumberFormatException();
+				return age;
+			} catch (NumberFormatException e) {
+				System.out.println("Invalid ! try again");
+			}
+		}
+	}
+
+	public String inputGender() {
+		System.out.println("Input gender: ");
+		return this.gender = getScanner().nextLine();
+	}
+
+	public String inputAddress() {
+		System.out.println("Input address: ");
+		return this.address = getScanner().nextLine();
+	}
+
+	public void inputOfficer() {
+		inputName();
+		inputAge();
+		inputGender();
+		inputAddress();
 	}
 
 	public String getFullName() {
@@ -47,10 +76,8 @@ public abstract class Officer {
 		this.address = address;
 	}
 
-	@Override
-	public String toString() {
-		return "Officer [fullName=" + fullName + ", age=" + age + ", gender=" + gender + ", address=" + address + "]";
+	public Scanner getScanner() {
+		Scanner SCANNER = new Scanner(System.in);
+		return SCANNER;
 	}
-	
-	
 }

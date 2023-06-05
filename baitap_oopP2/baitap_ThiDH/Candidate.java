@@ -1,16 +1,47 @@
 package baitap_ThiDH;
 
-public abstract class Candidate {
+import java.util.Scanner;
+
+public class Candidate {
 	protected int iD;
 	protected String fullName;
 	protected String address;
 	protected String priority;
 
-	public Candidate(int iD, String fullName, String address, String priority) {
-		this.iD = iD;
-		this.fullName = fullName;
-		this.address = address;
-		this.priority = priority;
+	public int inputId() {
+		while (true) {
+			try {
+				System.out.println("Input ID: ");
+				this.iD = Integer.parseInt(getScanner().nextLine());
+				if (iD < 1)
+					throw new NumberFormatException();
+				return iD;
+			} catch (NumberFormatException e) {
+				System.out.println("Invalid ! try again");
+			}
+		}
+
+	}
+
+	public String inputName() {
+		System.out.println("Input name: ");
+		return this.fullName = getScanner().nextLine();
+	}
+	
+	public String inputAddress() {
+		System.out.println("Input address: ");
+		return this.address = getScanner().nextLine();
+	}
+	
+	public String inputPriority() {
+		System.out.println("Input priority: ");
+		return this.priority = getScanner().nextLine();
+	}
+	
+	public void inputCandidate() {
+		inputName();
+		inputAddress();
+		inputPriority();
 	}
 
 	public int getiD() {
@@ -45,4 +76,8 @@ public abstract class Candidate {
 		this.priority = priority;
 	}
 
+	public Scanner getScanner() {
+		Scanner SCANNER = new Scanner(System.in);
+		return SCANNER;
+	}
 }
